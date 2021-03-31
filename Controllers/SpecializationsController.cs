@@ -15,6 +15,7 @@ namespace SpecilizationAPI.Controllers
     public class SpecializationsController : ControllerBase
     {
         private readonly ISpecializationRepo _context;
+        static readonly log4net.ILog _log4net = log4net.LogManager.GetLogger(typeof(SpecializationsController));
 
         public SpecializationsController(ISpecializationRepo context)
         {
@@ -25,6 +26,7 @@ namespace SpecilizationAPI.Controllers
         [HttpGet]
         public  IEnumerable<SpecializationTable> GetSpecializations()
         {
+            _log4net.Info("Specialization get is initialized");
             return  _context.GetAllSpecialization();
         }
 
@@ -37,6 +39,7 @@ namespace SpecilizationAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<SpecializationTable>> PostSpecialization(SpecializationTable specialization)
         {
+            _log4net.Info("Specilization post method is initialized");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -49,6 +52,7 @@ namespace SpecilizationAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserServiceInfo(string id)
         {
+            _log4net.Info("this row with id:"+id+"Deleted");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
